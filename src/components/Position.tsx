@@ -1,15 +1,18 @@
-import { useState } from 'react';
+import { useDispatch } from "react-redux";
+import { useAppSelector  } from "../app/hooks";
+import { actions as positionActions} from "../features/position";
+
 
 export const Position = () => {
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(0);
+  const dispatch = useDispatch();
+  const position = useAppSelector(state => state.position);
 
-  const moveLeft = () => setX(x => x - 1);
-  const moveRight = () => setX(x => x + 1);
-  const moveUp = () => setY(y => y - 1);
-  const moveDown = () => setY(y => y + 1);
+  const moveLeft = () => dispatch(positionActions.moveLeft());
+  const moveRight = () => dispatch(positionActions.moveRight());
+  const moveUp = () => dispatch(positionActions.moveUp());
+  const moveDown = () => dispatch(positionActions.moveDown());
 
-  const transformValue = `translate(${x * 100}%, ${y * 100}%)`;
+  const transformValue = `translate(${position.x * 100}%, ${position.y * 100}%)`;
 
   return (
     <section className="position">
@@ -21,7 +24,7 @@ export const Position = () => {
 
           <div>
             <button onClick={moveLeft}>&larr;</button>
-            <strong>{x}:{y}</strong>
+            <strong>{position.x}:{position.y}</strong>
             <button onClick={moveRight}>&rarr;</button>
           </div>
 
@@ -30,7 +33,7 @@ export const Position = () => {
 
         <div className="field">
           <div className="track" style={{ transform: transformValue }}>
-            {x + y}
+            {position.x + position.y}
           </div>
         </div>
       </div>

@@ -28,7 +28,7 @@ const clear = (): ClearAction => ({
 
 type Action = AddAction | TakeAction | ClearAction;
 
-const amountReducer = (amount = 0, action: Action) => {
+const amountReducer = (amount: number = 0, action: Action): number => {
   switch (action.type) {
     case 'amount/ADD':
       return amount + action.payload;

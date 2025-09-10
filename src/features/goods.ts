@@ -30,7 +30,8 @@ type Action = AddAction | TakeAction | ClearAction;
 
 export const actions = { add, take, clear };
 
-const goodsReducer = (goods: string[] = [], action: Action): string[] => {
+const goodsReducer = (goods: string[] | undefined, action: any): string[] => {
+  if (goods === undefined) goods = [];
   switch (action.type){
     case 'goods/ADD':
       return [...goods, action.payload];

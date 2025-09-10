@@ -46,7 +46,8 @@ type Position = {
 
 const startPosition: Position = { x: 0, y: 0 };
 
-const positionReducer = (position: Position = startPosition, action: Action): Position => {
+const positionReducer = (position: Position | undefined, action: any): Position => {
+  if (position === undefined) position = startPosition;
   switch (action.type) {
     case 'position/MOVE_LEFT':
       return { ...position, x: position.x - 1 };

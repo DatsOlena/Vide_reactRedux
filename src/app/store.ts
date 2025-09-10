@@ -1,17 +1,16 @@
 // npm i redux @types/redux
-import { composeWithDevTools } from 'redux-devtools-extension'
-import { combineReducers, createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import amountReducer from '../features/amount';
 import goodsReducer from '../features/goods';
-import positionReducer from '../features/position';
+import positionReducer from '../features/position'; // <-- add this line
 
-const reducer = combineReducers({
+export const store = configureStore({
+  reducer: {
     amount: amountReducer,
     goods: goodsReducer,
-    position: positionReducer
-
+    position: positionReducer, // <-- add this line
+  },
 });
-const store = createStore(reducer, composeWithDevTools());
 
 export type RootState = ReturnType<typeof store.getState>;
 

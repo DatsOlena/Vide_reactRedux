@@ -28,7 +28,8 @@ const clear = (): ClearAction => ({
 
 type Action = AddAction | TakeAction | ClearAction;
 
-const amountReducer = (amount: number = 0, action: Action): number => {
+const amountReducer = (amount: number | undefined, action: any): number => {
+  if (amount === undefined) amount = 0;
   switch (action.type) {
     case 'amount/ADD':
       return amount + action.payload;
